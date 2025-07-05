@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZK Egg Timer - Succinct Mainnet Launch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">ZK Egg Timer</h1>
+                <p class="subtitle">Succinct Mainnet Launch Countdown</p>
+            </div>
+            <div class="countdown-display">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="personalization-section">
+                <div class="input-group">
+                    <label for="username">Enter your handle:</label>
+                    <input type="text" id="username" placeholder="@yourhandle" maxlength="20">
+                </div>
+                <!-- Custom message input removed as per request -->
+            </div>
+
+            <div class="egg-selection">
+                <h2>Choose Your ZK Egg</h2>
+                <div class="eggs-grid">
+                    <div class="egg-container" data-color="#FF54D7" data-team="Yinger" data-animal="phoenix">
+                        <div class="cubic-box">
+                            <div class="egg pink-egg">
+                                <div class="egg-shine"></div>
+                                <div class="egg-pattern"></div>
+                            </div>
+                        </div>
+                        <div class="egg-info">
+                            <span class="team-name">Yinger</span>
+                        </div>
+                    </div>
+
+                    <div class="egg-container" data-color="#61C3FF" data-team="Addy" data-animal="dragon">
+                        <div class="cubic-box">
+                            <div class="egg blue-egg">
+                                <div class="egg-shine"></div>
+                                <div class="egg-pattern"></div>
+                            </div>
+                        </div>
+                        <div class="egg-info">
+                            <span class="team-name">Addy</span>
+                        </div>
+                    </div>
+
+                    <div class="egg-container" data-color="#B753FF" data-team="ZkDan" data-animal="lion">
+                        <div class="cubic-box">
+                            <div class="egg purple-egg">
+                                <div class="egg-shine"></div>
+                                <div class="egg-pattern"></div>
+                            </div>
+                        </div>
+                        <div class="egg-info">
+                            <span class="team-name">ZkDan</span>
+                        </div>
+                    </div>
+
+                    <div class="egg-container" data-color="#B0FF6F" data-team="fakedev9999" data-animal="eagle">
+                        <div class="cubic-box">
+                            <div class="egg green-egg">
+                                <div class="egg-shine"></div>
+                                <div class="egg-pattern"></div>
+                            </div>
+                        </div>
+                        <div class="egg-info">
+                            <span class="team-name">fakedev9999</span>
+                        </div>
+                    </div>
+
+                    <div class="egg-container" data-color="#FF955E" data-team="Lsquard" data-animal="gorilla">
+                        <div class="cubic-box">
+                            <div class="egg orange-egg">
+                                <div class="egg-shine"></div>
+                                <div class="egg-pattern"></div>
+                            </div>
+                        </div>
+                        <div class="egg-info">
+                            <span class="team-name">Lsquard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selected-egg-section" id="selectedEggSection" style="display: none;">
+                <h2>Your ZK Egg</h2>
+                <div class="selected-egg-container">
+                    <div class="progress-ring">
+                        <svg width="300" height="300">
+                            <circle cx="150" cy="150" r="140" class="progress-ring-circle-bg"/>
+                            <circle cx="150" cy="150" r="140" class="progress-ring-circle" id="progressCircle"/>
+                        </svg>
+                        <div class="selected-egg-wrapper">
+                            <div class="cubic-box large rotating-egg" id="selectedEggCubicBox">
+                                <div class="egg large-egg" id="selectedEgg">
+                                    <div class="egg-shine"></div>
+                                    <div class="egg-pattern"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="egg-details">
+                        <h3 id="selectedTeamName"></h3>
+                        <p id="userInfo"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button id="shareBtn" class="share-btn" style="display: none;">
+                    🐣 Share Your ZK Egg
+                </button>
+                <button id="downloadBtn" class="download-btn" style="display: none;">
+                    ⬇️ Download Your ZK Egg
+                </button>
+            </div>
+        </main>
+
+        <div class="hatch-animation" id="hatchAnimation" style="display: none;">
+            <div class="hatch-content">
+                <div class="cracking-egg">
+                    <div class="egg-crack"></div>
+                </div>
+                <div class="hatched-animal" id="hatchedAnimal"></div>
+                <div class="hatch-message">
+                    <h2 id="hatchTitle"></h2>
+                    <p id="hatchSubtitle"></p>
+                </div>
+                <div class="confetti-container">
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

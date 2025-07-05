@@ -1,0 +1,654 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-content {
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #B753FF, #FF54D7, #61C3FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    text-shadow: 0 0 30px rgba(183, 83, 255, 0.5);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+/* Countdown Display */
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 100px;
+}
+
+.countdown-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: #cccccc;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Personalization Section */
+.personalization-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    width: 50%; /* Reduced width as requested */
+    max-width: 400px; /* Max width for larger screens */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #B753FF;
+    box-shadow: 0 0 20px rgba(183, 83, 255, 0.5);
+}
+
+.input-group input::placeholder {
+    color: #cccccc;
+}
+
+/* Egg Selection Styles */
+.egg-selection {
+    margin-bottom: 40px;
+}
+
+.egg-selection h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #B753FF, #FF54D7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.eggs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.egg-container {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.egg-container:hover {
+    transform: scale(1.05);
+}
+
+/* Style for locked eggs */
+body.egg-locked .egg-container:not(.selected) {
+    pointer-events: none; /* Disable clicks on non-selected eggs */
+    opacity: 0.5; /* Dim non-selected eggs */
+    filter: grayscale(100%);
+}
+
+body.egg-locked .egg-container.selected {
+    pointer-events: none; /* Disable clicks on the selected egg too, as it's locked */
+}
+
+.egg-container.selected {
+    transform: scale(1.1);
+}
+
+.egg-container.selected .cubic-box {
+    border-color: #ffffff;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+/* Cubic Box Styles */
+.cubic-box {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    /* Added for 3D perspective */
+    perspective: 1000px;
+}
+
+.cubic-box.large {
+    width: 200px;
+    height: 200px;
+}
+
+.cubic-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* Egg Styles */
+.egg {
+    width: 80px;
+    height: 100px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    /* Added for 3D appearance */
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.3), /* Inner shadow for depth */
+        0 10px 20px rgba(0, 0, 0, 0.4); /* Outer shadow for lift */
+    transform: rotateX(10deg) rotateY(0deg) rotateZ(0deg); /* Initial slight 3D rotation */
+    transform-style: preserve-3d; /* Enable 3D transforms for children */
+}
+
+.egg.large-egg {
+    width: 120px;
+    height: 150px;
+}
+
+.egg-shine {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 25%;
+    height: 35%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), transparent);
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+.egg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.2), transparent 40%);
+}
+
+/* Individual Egg Colors - Updated with Succinct Colors */
+.pink-egg {
+    background: linear-gradient(135deg, #FF54D7, #FF54D7CC); /* Succinct Pink */
+    box-shadow: 0 0 20px #FF54D780, inset 0 0 20px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.blue-egg {
+    background: linear-gradient(135deg, #61C3FF, #61C3FFCC); /* Succinct Blue */
+    box-shadow: 0 0 20px #61C3FF80, inset 0 0 20px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.purple-egg {
+    background: linear-gradient(135deg, #B753FF, #B753FFCC); /* Succinct Purple */
+    box-shadow: 0 0 20px #B753FF80, inset 0 0 20px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.green-egg {
+    background: linear-gradient(135deg, #B0FF6F, #B0FF6FCC); /* Succinct Green */
+    box-shadow: 0 0 20px #B0FF6F80, inset 0 0 20px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.orange-egg {
+    background: linear-gradient(135deg, #FF955E, #FF955ECC); /* Succinct Orange */
+    box-shadow: 0 0 20px #FF955E80, inset 0 0 20px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.egg-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.team-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+/* Selected Egg Section */
+.selected-egg-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.selected-egg-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #B753FF, #FF54D7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.selected-egg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.progress-ring svg {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: #B753FF;
+    stroke-width: 8;
+    stroke-dasharray: 880;
+    stroke-dashoffset: 880;
+    transition: stroke-dashoffset 0.5s ease;
+    filter: drop-shadow(0 0 10px rgba(183, 83, 255, 0.8));
+}
+
+.selected-egg-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Ensure the wrapper also has perspective for child 3D transforms */
+    perspective: 1000px; /* Added for the 3D effect */
+}
+
+/* Rotating Egg Animation */
+.rotating-egg {
+    /* The rotation is applied to the cubic-box, which contains the egg */
+    animation: rotate3D 10s linear infinite;
+    transform-style: preserve-3d;
+    /* To ensure it rotates around its center and is visually centered */
+    transform-origin: center center;
+    /* Initial transform to make it appear 3D from the start */
+    transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg);
+}
+
+@keyframes rotate3D {
+    0% { transform: rotateX(15deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(15deg) rotateY(360deg) rotateZ(0deg); }
+}
+
+
+.egg-details {
+    text-align: center;
+}
+
+.egg-details h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.egg-details p {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-bottom: 5px;
+}
+
+/* Action Buttons */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.share-btn, .download-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.share-btn {
+    background: linear-gradient(45deg, #B753FF, #FF54D7);
+    color: #ffffff;
+}
+
+.share-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(183, 83, 255, 0.5);
+}
+
+.download-btn {
+    background: linear-gradient(45deg, #61C3FF, #1E90FF);
+    color: #ffffff;
+}
+
+.download-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(97, 195, 255, 0.5);
+}
+
+/* Hatch Animation */
+.hatch-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.hatch-content {
+    text-align: center;
+    position: relative;
+}
+
+.cracking-egg {
+    width: 200px;
+    height: 250px;
+    margin: 0 auto 30px;
+    position: relative;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.egg-crack {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #FF54D7, #FF1493);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform: translate(-50%, -50%);
+}
+
+.egg-crack::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background: #333;
+    transform: rotate(-15deg);
+    animation: crack 2s ease-in-out;
+}
+
+@keyframes crack {
+    0% { width: 0; }
+    100% { width: 80%; }
+}
+
+.hatched-animal {
+    font-size: 8rem;
+    animation: hatch 2s ease-out;
+    margin-bottom: 20px;
+}
+
+@keyframes hatch {
+    0% { transform: scale(0) rotate(0deg); opacity: 0; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 0.8; }
+    100% { transform: scale(1) rotate(360deg); opacity: 1; }
+}
+
+.hatch-message h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #B753FF, #FF54D7, #61C3FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 20px rgba(183, 83, 255, 0.5); }
+    100% { text-shadow: 0 0 30px rgba(183, 83, 255, 0.8); }
+}
+
+.hatch-message p {
+    font-size: 1.2rem;
+    color: #cccccc;
+}
+
+/* Confetti Animation */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #B753FF;
+    animation: confetti-fall 3s linear infinite;
+}
+
+.confetti:nth-child(1) { left: 10%; animation-delay: 0s; background: #FF54D7; }
+.confetti:nth-child(2) { left: 30%; animation-delay: 0.5s; background: #61C3FF; }
+.confetti:nth-child(3) { left: 50%; animation-delay: 1s; background: #B0FF6F; }
+.confetti:nth-child(4) { left: 70%; animation-delay: 1.5s; background: #FF955E; }
+.confetti:nth-child(5) { left: 90%; animation-delay: 2s; background: #B753FF; }
+
+@keyframes confetti-fall {
+    0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .countdown-display {
+        gap: 15px;
+    }
+
+    .countdown-item {
+        padding: 15px;
+        min-width: 80px;
+    }
+
+    .countdown-number {
+        font-size: 2rem;
+    }
+
+    .eggs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 20px;
+    }
+
+    .cubic-box {
+        width: 120px;
+        height: 120px;
+    }
+
+    .egg {
+        width: 60px;
+        height: 75px;
+    }
+
+    .progress-ring {
+        width: 250px;
+        height: 250px;
+    }
+
+    .hatched-animal {
+        font-size: 6rem;
+    }
+
+    .hatch-message h2 {
+        font-size: 2rem;
+    }
+
+    .input-group {
+        width: 75%; /* Adjust for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .countdown-display {
+        gap: 10px;
+    }
+
+    .countdown-item {
+        padding: 10px;
+        min-width: 70px;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+
+    .eggs-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .progress-ring {
+        width: 200px;
+        height: 200px;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .share-btn, .download-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .input-group {
+        width: 90%; /* Adjust for very small screens */
+    }
+}
